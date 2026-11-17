@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Almacén Vale y Feña | Tu almacén de barrio y pan fresco en Pirque</title>
+  <meta name="description" content="Almacén Vale y Feña en Gabriela Mistral 247, Pirque: marraquetas crujientes y hallullas calientitas todos los días, fiambrería, lácteos, abarrotes y verduras frescas." />
+
+  <!-- Tipografía Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome para íconos limpios -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              amber: '#D97706',
+              amberLight: '#FEF3C7',
+              green: '#15803D',
+              greenDark: '#14532D',
+              cream: '#FFFBEB',
+              warmGray: '#FAFAF9',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.7; }
+    }
+    .pulse-dot {
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-amber-200 selection:text-amber-900">
+
+  <!-- =========================================================================
+       BARRA DE NAVEGACIÓN SUPERIOR STICKY
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <!-- Logo y Nombre del Almacén -->
+      <a href="#inicio" class="flex items-center gap-2.5 group min-w-0">
+        <div class="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center shadow-sm group-hover:bg-amber-700 transition-colors shrink-0">
+          <i class="fa-solid fa-store text-lg"></i>
+        </div>
+        <div class="truncate">
+          <span class="font-display font-extrabold text-base sm:text-lg text-stone-900 block leading-tight truncate">
+            Almacén Vale y Feña
+          </span>
+          <span class="text-xs text-stone-500 hidden sm:block">Gabriela Mistral 247, Pirque</span>
+        </div>
+      </a>
+
+      <!-- Enlaces de navegación (Escritorio) -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-stone-600">
+        <a href="#encargo-pan" class="hover:text-amber-700 transition-colors">Encargo de Pan</a>
+        <a href="#nuestro-local" class="hover:text-amber-700 transition-colors">Nuestro Local</a>
+        <a href="#vitrina" class="hover:text-amber-700 transition-colors">Productos</a>
+        <a href="#horarios-ubicacion" class="hover:text-amber-700 transition-colors">Horarios y Pago</a>
+      </nav>
+
+      <!-- Botón Acción Principal Header -->
+      <div class="flex items-center gap-2 shrink-0">
+        <a id="btn-wsp-header" href="https://wa.me/569793403388" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 active:scale-95 text-white font-semibold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl shadow-sm transition-all">
+          <i class="fa-brands fa-whatsapp text-base sm:text-lg"></i>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       SECCIÓN HERO / PORTADA PRINCIPAL
+       ========================================================================= -->
+  <section id="inicio" class="relative overflow-hidden bg-gradient-to-b from-amber-50 via-orange-50/40 to-stone-50 pt-6 pb-12 sm:pt-12 sm:pb-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+
+        <!-- Columna Texto y Llamados a la Acción -->
+        <div class="lg:col-span-7 space-y-5">
+          <!-- Badge dinámico Abierto / Cerrado -->
+          <div class="inline-flex items-center gap-2.5 bg-white border border-stone-200/90 px-3.5 py-1.5 rounded-full shadow-sm">
+            <span id="estado-dot" class="w-2.5 h-2.5 rounded-full bg-green-500 pulse-dot"></span>
+            <span id="estado-texto" class="text-xs sm:text-sm font-semibold text-stone-800">Verificando horario...</span>
+            <span class="text-stone-300">|</span>
+            <span class="text-xs text-stone-500 font-medium">Desde 09:00 AM</span>
+          </div>
+
+          <h1 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-stone-900 leading-[1.15] tracking-tight">
+            Pan fresco de barrio y todo lo que necesitas, <span class="text-amber-600">a un clic de distancia.</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl">
+            Encuentra marraquetas crujientes y hallullas calientitas todos los días, junto con fiambrería, lácteos, abarrotes y verduras frescas para tu hogar.
+          </p>
+
+          <!-- Botones de Acción Directa -->
+          <div class="flex flex-col sm:flex-row gap-3 pt-1">
+            <a href="#encargo-pan"
+               class="inline-flex items-center justify-center gap-2.5 bg-amber-600 hover:bg-amber-700 active:scale-[0.99] text-white font-bold text-base px-6 py-3.5 rounded-2xl shadow-md shadow-amber-600/20 transition-all">
+              <i class="fa-solid fa-bread-slice text-lg"></i>
+              <span>Reservar Pan del Día</span>
+            </a>
+
+            <a id="btn-wsp-hero" href="https://wa.me/569793403388" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-700 active:scale-[0.99] text-white font-bold text-base px-6 py-3.5 rounded-2xl shadow-md shadow-green-600/20 transition-all">
+              <i class="fa-brands fa-whatsapp text-xl"></i>
+              <span>Consultar por WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Datos rápidos de confianza -->
+          <div class="grid grid-cols-3 gap-2 sm:gap-4 pt-3 border-t border-stone-200/70 max-w-lg">
+            <div>
+              <p class="font-display font-bold text-stone-900 text-sm sm:text-base">Marraquetas</p>
+              <p class="text-xs text-stone-500">De 2 dientes, crujientes</p>
+            </div>
+            <div>
+              <p class="font-display font-bold text-stone-900 text-sm sm:text-base">Hallullas</p>
+              <p class="text-xs text-stone-500">Calientitas y frescas</p>
+            </div>
+            <div>
+              <p class="font-display font-bold text-stone-900 text-sm sm:text-base">CuentaRUT</p>
+              <p class="text-xs text-stone-500">Efectivo y transferencia</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Fotografía / Visual Principal (Solo Marraquetas y Hallullas) -->
+        <div class="lg:col-span-5">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-amber-900 aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/4]">
+            <img
+              id="img-hero-pan"
+              src="./Gemini_Generated_Image_bbh3opbbh3opbbh3 (1)_3.jpg"
+              onerror="usarRespaldoPan(this, 'completo')"
+              alt="Marraquetas y hallullas frescas en Almacén Vale y Feña"
+              class="w-full h-full object-cover object-center"
+            />
+            <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-lg border border-stone-100 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="truncate">
+                  <p class="font-bold text-xs sm:text-sm text-stone-900 truncate">Gabriela Mistral 247, Pirque</p>
+                  <p class="text-xs text-stone-500 truncate">Marraquetas y hallullas frescas</p>
+                </div>
+              </div>
+              <a href="#horarios-ubicacion" class="text-xs font-bold text-amber-700 hover:text-amber-800 whitespace-nowrap bg-amber-50 px-3 py-2 rounded-xl">
+                Cómo llegar
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MÓDULO DESTACADO: ENCARGO DE PAN FRESCO (CONECTADO A GOOGLE FORMS)
+       ========================================================================= -->
+  <section id="encargo-pan" class="py-10 sm:py-14 max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="bg-gradient-to-br from-amber-600 to-amber-700 rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+      <div class="absolute -right-12 -top-12 w-56 h-56 rounded-full bg-white/10 pointer-events-none"></div>
+      <div class="absolute -left-10 -bottom-16 w-48 h-48 rounded-full bg-amber-900/20 pointer-events-none"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-6 space-y-4">
+          <span class="inline-flex items-center gap-1.5 bg-amber-900/40 text-amber-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+            <i class="fa-solid fa-bolt"></i> Pedido Express en 15 segundos
+          </span>
+          <h2 class="font-display font-extrabold text-2xl sm:text-3xl leading-tight">
+            Asegura tus marraquetas y hallullas antes de que se agoten
+          </h2>
+          <p class="text-amber-50 text-sm sm:text-base leading-relaxed">
+            Completa el formulario con la cantidad exacta de <strong>marraquetas (de 2 dientes)</strong> o <strong>hallullas</strong> que necesitas, elige si retiras <strong>Hoy</strong> o <strong>Mañana</strong> y te lo dejamos reservado en el mesón.
+          </p>
+          <ul class="space-y-2.5 text-sm text-amber-100 pt-1">
+            <li class="flex items-center gap-2.5">
+              <i class="fa-solid fa-circle-check text-amber-300"></i>
+              <span>Sin filas ni esperas: llegas y retiras tu bolsa lista.</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i class="fa-solid fa-circle-check text-amber-300"></i>
+              <span>Panadería exclusiva de marraquetas y hallullas del día.</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i class="fa-solid fa-circle-check text-amber-300"></i>
+              <span>Pagas al retirar con Efectivo, Transferencia o CuentaRUT.</span>
+            </li>
+          </ul>
+
+          <div class="pt-2 flex flex-col sm:flex-row gap-3">
+            <a id="btn-form-pan-externo" href="https://docs.google.com/forms/d/e/1FAIpQLSdSAToqE30xHMpMJEV9prA7SkWDub-W3G1x3Raz35Amul64Gw/viewform?usp=dialog" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-2 bg-white text-amber-800 hover:bg-amber-50 active:scale-95 font-extrabold text-sm sm:text-base px-6 py-3.5 rounded-2xl shadow-lg transition-all">
+              <i class="fa-solid fa-up-right-from-square"></i>
+              <span>Abrir Formulario en Pantalla Completa</span>
+            </a>
+            <a id="btn-wsp-pan-rapido" href="https://wa.me/569793403388" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-2 bg-amber-900/40 hover:bg-amber-900/60 border border-amber-300/30 text-white font-semibold text-sm px-5 py-3.5 rounded-2xl transition-all">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>Pedir por WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tarjeta Derecha: Formulario Incrustado en Vivo -->
+        <div class="lg:col-span-6 w-full bg-white text-stone-800 rounded-2xl p-4 sm:p-5 shadow-xl border border-amber-200/50">
+          <div class="flex items-center justify-between border-b border-stone-100 pb-3 mb-3">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+                <i class="fa-solid fa-clipboard-list"></i>
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-sm sm:text-base text-stone-900">Solicitud de Pan - Vale y Feña</h3>
+                <p class="text-[11px] text-stone-500">Se suma directo a nuestra planilla diaria</p>
+              </div>
+            </div>
+            <span class="bg-green-100 text-green-800 text-[11px] font-bold px-2.5 py-1 rounded-full">Activo</span>
+          </div>
+
+          <div class="w-full rounded-xl overflow-hidden bg-stone-50 border border-stone-200">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSdSAToqE30xHMpMJEV9prA7SkWDub-W3G1x3Raz35Amul64Gw/viewform?embedded=true"
+              class="w-full h-[460px] border-0"
+              loading="lazy"
+              title="Formulario de Encargo de Pan Almacén Vale y Feña">
+              Cargando formulario...
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       GALERÍA DEL LOCAL ("CONOCE NUESTRO ALMACÉN")
+       ========================================================================= -->
+  <section id="nuestro-local" class="py-10 sm:py-14 max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-700">Tu negocio de confianza en Pirque</span>
+        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-stone-900 mt-1">
+          Conoce nuestro local por dentro
+        </h2>
+      </div>
+      <p class="text-sm text-stone-500 max-w-md">
+        Pasillos ordenados, atención amable y productos frescos reposicionados todos los días en Gabriela Mistral 247.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- Tarjeta 1: Mesón y Atención -->
+      <div class="group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-md transition-all">
+        <div class="aspect-[16/10] overflow-hidden bg-stone-200 relative">
+          <img
+            src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x400/E7E5E4/44403C?text=Sala+de+Ventas+y+Abarrotes';"
+            alt="Pasillos y abarrotes del almacén"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-stone-800 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+            🛒 Sala de Ventas
+          </span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-lg text-stone-900">Abarrotes y Despensa</h3>
+          <p class="text-sm text-stone-600 mt-1">Todo lo esencial para tu cocina, limpieza, bebidas y snacks sin tener que ir lejos.</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2: Panadería (Exclusivo Marraquetas y Hallullas) -->
+      <div class="group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-md transition-all">
+        <div class="aspect-[16/10] overflow-hidden bg-amber-900 relative">
+          <img
+            src="./Gemini_Generated_Image_bbh3opbbh3opbbh3 (1)_3.jpg"
+            onerror="usarRespaldoPan(this, 'completo')"
+            alt="Marraquetas y hallullas frescas del día"
+            class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          />
+          <span class="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+            🥖 Marraquetas y Hallullas
+          </span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-lg text-stone-900">Panadería Fresca</h3>
+          <p class="text-sm text-stone-600 mt-1">Trabajamos exclusivamente marraquetas crujientes de 2 dientes y hallullas calientitas cada día.</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3: Fiambrería y Lácteos -->
+      <div class="group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-md transition-all">
+        <div class="aspect-[16/10] overflow-hidden bg-stone-200 relative">
+          <img
+            src="https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=800&q=80"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x400/DCFCE7/166534?text=Fiambreria+y+Lacteos';"
+            alt="Fiambrería, quesos y lácteos refrigerados"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <span class="absolute top-3 left-3 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+            🧀 Frescos y Fríos
+          </span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-lg text-stone-900">Fiambrería y Lácteos</h3>
+          <p class="text-sm text-stone-600 mt-1">Queso laminado, jamón, cecinas, leches, yogures y bebidas bien heladas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VITRINA DIGITAL DE PRODUCTOS (SIN CARRITO -> CONSULTA DIRECTA WHATSAPP)
+       ========================================================================= -->
+  <section id="vitrina" class="py-10 sm:py-14 bg-white border-y border-stone-200/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-green-700">Catálogo de referencia</span>
+          <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-stone-900 mt-1">
+            Lo que encuentras en nuestro almacén
+          </h2>
+          <p class="text-sm text-stone-500 mt-1">
+            Toca cualquier producto para preguntarnos disponibilidad o pedir que te lo apartemos por WhatsApp.
+          </p>
+        </div>
+
+        <!-- Buscador rápido en la vitrina -->
+        <div class="relative w-full md:w-72">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
+          <input
+            type="text"
+            id="buscador-productos"
+            placeholder="Buscar (ej: marraqueta, queso...)"
+            class="w-full pl-10 pr-4 py-2.5 bg-stone-100 border border-stone-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all"
+          />
+        </div>
+      </div>
+
+      <!-- Pestañas de Categorías (Deslizables en celular) -->
+      <div id="filtros-categorias" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-4">
+        <button data-cat="todos" class="btn-cat active-cat bg-stone-900 text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap transition-all">
+          Todos
+        </button>
+        <button data-cat="panaderia" class="btn-cat bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap transition-all">
+          🥖 Panadería (Marraquetas y Hallullas)
+        </button>
+        <button data-cat="fiambreria" class="btn-cat bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap transition-all">
+          🧀 Fiambrería y Lácteos
+        </button>
+        <button data-cat="abarrotes" class="btn-cat bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap transition-all">
+          🥫 Abarrotes
+        </button>
+        <button data-cat="bebidas" class="btn-cat bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap transition-all">
+          🥤 Bebidas y Jugos
+        </button>
+        <button data-cat="verduras" class="btn-cat bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap transition-all">
+          🥬 Frutas y Verduras
+        </button>
+      </div>
+
+      <!-- Grilla de Productos -->
+      <div id="grid-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Renderizado dinámico mediante JavaScript -->
+      </div>
+
+      <!-- Mensaje cuando no hay resultados de búsqueda -->
+      <div id="sin-resultados" class="hidden text-center py-12 bg-stone-50 rounded-3xl border border-dashed border-stone-300 mt-4">
+        <p class="font-display font-bold text-stone-700 text-lg">¿No ves lo que buscas en la lista?</p>
+        <p class="text-sm text-stone-500 mt-1 mb-4">Tenemos cientos de productos más en el local. Escríbenos directo y te confirmamos al instante.</p>
+        <a id="btn-wsp-no-encontrado" href="https://wa.me/569793403388" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold text-sm px-5 py-3 rounded-xl shadow-sm transition-all">
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          <span>Preguntar por otro producto</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECCIÓN HORARIOS, UBICACIÓN EN PIRQUE Y MEDIOS DE PAGO
+       ========================================================================= -->
+  <section id="horarios-ubicacion" class="py-12 sm:py-16 max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+
+      <!-- Tarjeta Horarios y Medios de Pago -->
+      <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/90 shadow-sm flex flex-col justify-between space-y-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-700">Información útil</span>
+          <h2 class="font-display font-extrabold text-2xl text-stone-900 mt-1">Horarios de Atención</h2>
+          <p class="text-sm text-stone-500 mt-1">Abrimos todos los días desde las 09:00 AM.</p>
+
+          <ul class="mt-5 space-y-3 text-sm">
+            <li class="flex items-center justify-between py-2.5 border-b border-stone-100">
+              <span class="font-medium text-stone-700">Lunes a Viernes</span>
+              <span class="font-bold text-stone-900 bg-stone-100 px-3 py-1 rounded-lg">09:00 – 21:30 hrs</span>
+            </li>
+            <li class="flex items-center justify-between py-2.5 border-b border-stone-100">
+              <span class="font-medium text-stone-700">Sábados</span>
+              <span class="font-bold text-stone-900 bg-stone-100 px-3 py-1 rounded-lg">09:00 – 22:00 hrs</span>
+            </li>
+            <li class="flex items-center justify-between py-2.5">
+              <span class="font-medium text-stone-700">Domingos y Festivos</span>
+              <span class="font-bold text-stone-900 bg-stone-100 px-3 py-1 rounded-lg">09:00 – 20:30 hrs</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Medios de pago aceptados -->
+        <div class="pt-4 border-t border-stone-200/80">
+          <p class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-3">Medios de pago en el local</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 bg-green-50 border border-green-200 text-green-900 text-xs font-semibold px-3 py-2 rounded-xl">
+              <i class="fa-solid fa-money-bill-wave text-green-700"></i> Efectivo
+            </span>
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-900 text-xs font-semibold px-3 py-2 rounded-xl">
+              <i class="fa-solid fa-building-columns text-blue-700"></i> Transferencia
+            </span>
+            <span class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-950 text-xs font-semibold px-3 py-2 rounded-xl">
+              <i class="fa-solid fa-credit-card text-amber-700"></i> CuentaRUT / BancoEstado
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta Ubicación y Mapa -->
+      <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/90 shadow-sm flex flex-col justify-between space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-green-700">Dónde estamos</span>
+            <h2 class="font-display font-extrabold text-2xl text-stone-900 mt-1">Visítanos en Pirque</h2>
+            <p class="text-sm text-stone-700 font-medium mt-1 flex items-center gap-2">
+              <i class="fa-solid fa-location-dot text-red-500"></i>
+              <span>Gabriela Mistral 247, Pirque</span>
+            </p>
+          </div>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=Gabriela+Mistral+247+Pirque+Chile" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-stone-800 text-white font-semibold text-sm px-4 py-3 rounded-xl transition-all shrink-0">
+            <i class="fa-solid fa-diamond-turn-right"></i>
+            <span>Abrir en Google Maps</span>
+          </a>
+        </div>
+
+        <!-- Mapa interactivo integrado de Gabriela Mistral 247, Pirque -->
+        <div class="w-full h-64 sm:h-72 rounded-2xl overflow-hidden border border-stone-200 bg-stone-100 relative">
+          <iframe
+            class="w-full h-full border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=Gabriela%20Mistral%20247,%20Pirque,%20Chile&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            title="Ubicación Almacén Vale y Feña - Gabriela Mistral 247, Pirque">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       FOOTER / PIE DE PÁGINA
+       ========================================================================= -->
+  <footer class="bg-stone-900 text-stone-300 pt-10 pb-24 sm:pb-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 border-b border-stone-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center">
+            <i class="fa-solid fa-store"></i>
+          </div>
+          <div>
+            <p class="font-display font-bold text-white text-lg">Almacén Vale y Feña</p>
+            <p class="text-xs text-stone-400">Gabriela Mistral 247, Pirque • Abierto desde las 09:00 AM</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="#encargo-pan" class="text-xs sm:text-sm bg-stone-800 hover:bg-stone-700 text-white px-4 py-2.5 rounded-xl font-medium transition-colors">
+            Reservar Pan
+          </a>
+          <a id="btn-wsp-footer" href="https://wa.me/569793403388" target="_blank" rel="noopener noreferrer"
+             class="text-xs sm:text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-xl font-semibold inline-flex items-center gap-2 transition-colors">
+            <i class="fa-brands fa-whatsapp"></i> +56 9 7934 03388
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-500">
+        <p>© <span id="anio-actual">2026</span> Almacén Vale y Feña. Todos los derechos reservados.</p>
+        <p class="text-stone-400">
+          ¿Tienes un almacén o minimarket y quieres tu web + pedidos de pan?
+          <a id="btn-cotizar-servicio" href="https://wa.me/569793403388" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline font-semibold ml-1">
+            Cotiza tu solución aquí
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       BOTÓN FLOTANTE DE WHATSAPP (SIEMPRE ACCESIBLE EN EL CELULAR)
+       ========================================================================= -->
+  <a id="btn-wsp-flotante" href="https://wa.me/569793403388" target="_blank" rel="noopener noreferrer"
+     aria-label="Contactar por WhatsApp"
+     class="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 bg-green-600 hover:bg-green-700 active:scale-95 text-white font-bold px-4 py-3.5 rounded-full shadow-xl shadow-green-900/30 transition-all">
+    <i class="fa-brands fa-whatsapp text-2xl"></i>
+    <span class="text-sm pr-1">¿Consultas? Escríbenos</span>
+  </a>
+
+  <!-- =========================================================================
+       LÓGICA DE VITRINA, HORARIO EN VIVO Y ENLACES DINÁMICOS DE WHATSAPP
+       ========================================================================= -->
+  <script>
+    // Respaldo visual automático en caso de que la vista previa no tenga el archivo local cargado
+    function usarRespaldoPan(imgEl, tipo) {
+      if (!imgEl.dataset.intento) {
+        imgEl.dataset.intento = "1";
+        imgEl.src = "./Gemini_Generated_Image_bbh3opbbh3opbbh3 (1)_2.jpg";
+        return;
+      }
+      if (imgEl.dataset.intento === "1") {
+        imgEl.dataset.intento = "2";
+        imgEl.src = "./Gemini_Generated_Image_bbh3opbbh3opbbh3 (1).jpg";
+        return;
+      }
+      if (imgEl.dataset.intento === "2") {
+        imgEl.dataset.intento = "3";
+        imgEl.src = "./pan-almacen.jpg";
+        return;
+      }
+      imgEl.onerror = null;
+      // Genera una vista previa ilustrada de alta calidad con el cartel de Almacén Vale y Feña
+      const canvas = document.createElement("canvas");
+      canvas.width = 800;
+      canvas.height = 600;
+      const ctx = canvas.getContext("2d");
+
+      // Fondo madera cálida
+      const grad = ctx.createLinearGradient(0, 0, 0, 600);
+      grad.addColorStop(0, "#451a03");
+      grad.addColorStop(0.65, "#78350f");
+      grad.addColorStop(1, "#92400e");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 800, 600);
+
+      // Pizarra Almacén Vale y Feña
+      ctx.fillStyle = "#d97706";
+      ctx.fillRect(265, 55, 270, 175);
+      ctx.fillStyle = "#1c1917";
+      ctx.fillRect(277, 67, 246, 151);
+      ctx.fillStyle = "#fafaf9";
+      ctx.font = "bold 34px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Almacén", 400, 128);
+      ctx.fillText("Vale y Feña", 400, 175);
+
+      // Canasto y Marraquetas (Izquierda)
+      ctx.fillStyle = "#b45309";
+      ctx.beginPath();
+      ctx.ellipse(215, 430, 175, 110, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      const dibujarMarraqueta = (x, y) => {
+        ctx.fillStyle = "#f59e0b";
+        ctx.beginPath();
+        ctx.ellipse(x, y - 35, 52, 65, -0.1, 0, Math.PI * 2);
+        ctx.ellipse(x + 8, y + 45, 52, 65, 0.1, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#b45309";
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x - 5, y - 85);
+        ctx.lineTo(x + 12, y + 95);
+        ctx.stroke();
+      };
+      dibujarMarraqueta(155, 390);
+      dibujarMarraqueta(255, 405);
+
+      // Canasto y Hallullas (Derecha)
+      ctx.fillStyle = "#d97706";
+      ctx.beginPath();
+      ctx.ellipse(585, 435, 175, 105, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      const dibujarHallulla = (x, y) => {
+        ctx.fillStyle = "#fbbf24";
+        ctx.beginPath();
+        ctx.arc(x, y, 68, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#b45309";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        ctx.fillStyle = "#92400e";
+        [[-22,-15],[22,-15],[-22,20],[22,20],[0,0]].forEach(([dx, dy]) => {
+          ctx.fillRect(x + dx - 6, y + dy - 2, 12, 4);
+        });
+      };
+      dibujarHallulla(535, 385);
+      dibujarHallulla(635, 375);
+      dibujarHallulla(585, 445);
+
+      imgEl.src = canvas.toDataURL("image/jpeg", 0.9);
+    }
+
+    const CONFIG_ALMACEN = {
+      nombre: "Almacén Vale y Feña",
+      whatsappNumero: "569793403388",
+      whatsappDisplay: "+56 9 7934 03388",
+      urlFormularioPan: "https://docs.google.com/forms/d/e/1FAIpQLSdSAToqE30xHMpMJEV9prA7SkWDub-W3G1x3Raz35Amul64Gw/viewform?usp=dialog",
+      horarios: {
+        0: { apertura: "09:00", cierre: "20:30" },
+        1: { apertura: "09:00", cierre: "21:30" },
+        2: { apertura: "09:00", cierre: "21:30" },
+        3: { apertura: "09:00", cierre: "21:30" },
+        4: { apertura: "09:00", cierre: "21:30" },
+        5: { apertura: "09:00", cierre: "21:30" },
+        6: { apertura: "09:00", cierre: "22:00" }
+      }
+    };
+
+    const PRODUCTOS_VITRINA = [
+      {
+        id: 1,
+        categoria: "panaderia",
+        categoriaLabel: "Panadería",
+        nombre: "Marraqueta Fresca (2 dientes)",
+        descripcion: "Crujiente por fuera y blandita por dentro. Horneada y recibida fresca cada día.",
+        precio: "Consultar / unid. o kg",
+        icono: "🥖",
+        imagen: "./Gemini_Generated_Image_bbh3opbbh3opbbh3 (1)_3.jpg",
+        esPanAlmacen: true,
+        encuadreStyle: "object-position: left center;",
+        destacado: true
+      },
+      {
+        id: 2,
+        categoria: "panaderia",
+        categoriaLabel: "Panadería",
+        nombre: "Hallulla Tradicional",
+        descripcion: "Suave, doradita y recién llegada, ideal para el desayuno o la once familiar.",
+        precio: "Consultar / unid. o kg",
+        icono: "🫓",
+        imagen: "./Gemini_Generated_Image_bbh3opbbh3opbbh3 (1)_3.jpg",
+        esPanAlmacen: true,
+        encuadreStyle: "object-position: right center;",
+        destacado: true
+      },
+      {
+        id: 3,
+        categoria: "fiambreria",
+        categoriaLabel: "Fiambrería y Lácteos",
+        nombre: "Queso Mantecoso Laminado",
+        descripcion: "Laminado al momento o en formato cuarto/medio kilo para el pan calientito.",
+        precio: "Consultar por cuarto",
+        icono: "🧀",
+        imagen: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=600&q=80",
+        destacado: false
+      },
+      {
+        id: 4,
+        categoria: "fiambreria",
+        categoriaLabel: "Fiambrería y Lácteos",
+        nombre: "Jamón Pierna y Cecinas",
+        descripcion: "Variedad en jamón cocido, mortadela, salame y vienesas frescas.",
+        precio: "Consultar por cuarto",
+        icono: "🥩",
+        imagen: "https://images.unsplash.com/photo-1524438418049-ab2acb7aa48f?auto=format&fit=crop&w=600&q=80",
+        destacado: false
+      },
+      {
+        id: 5,
+        categoria: "fiambreria",
+        categoriaLabel: "Fiambrería y Lácteos",
+        nombre: "Leches, Yogures y Huevos",
+        descripcion: "Huevos de campo/gallina por bandeja o unidad, leche entera/descremada y mantequilla.",
+        precio: "Stock diario",
+        icono: "🥛",
+        imagen: "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=600&q=80",
+        destacado: false
+      },
+      {
+        id: 6,
+        categoria: "abarrotes",
+        categoriaLabel: "Abarrotes",
+        nombre: "Despensa Básica del Hogar",
+        descripcion: "Arroz, fideos, aceite, azúcar, harina, té, café y legumbres de marcas tradicionales.",
+        precio: "Precios de barrio",
+        icono: "🥫",
+        imagen: "https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?auto=format&fit=crop&w=600&q=80",
+        destacado: false
+      },
+      {
+        id: 7,
+        categoria: "bebidas",
+        categoriaLabel: "Bebidas y Jugos",
+        nombre: "Bebidas Retornables y Desechables",
+        descripcion: "Bebidas familiares, individuales heladas, aguas minerales y jugos en caja.",
+        precio: "Frías y al tiempo",
+        icono: "🥤",
+        imagen: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80",
+        destacado: false
+      },
+      {
+        id: 8,
+        categoria: "verduras",
+        categoriaLabel: "Frutas y Verduras",
+        descripcion: "Tomates, paltas, papas, cebollas, limones y verduras frescas para tu almuerzo.",
+        precio: "Llegada fresca",
+        icono: "🥑",
+        imagen: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80",
+        destacado: false
+      }
+    ];
+
+    function crearLinkWhatsApp(numero, mensaje) {
+      return `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    }
+
+    function actualizarEstadoAbierto() {
+      const dot = document.getElementById("estado-dot");
+      const texto = document.getElementById("estado-texto");
+      if (!dot || !texto) return;
+
+      const ahora = new Date();
+      const opcionesChile = { timeZone: "America/Santiago", hour12: false, hour: "2-digit", minute: "2-digit" };
+      const horaStr = new Intl.DateTimeFormat("es-CL", opcionesChile).format(ahora);
+      const diaSemana = new Date(ahora.toLocaleString("en-US", { timeZone: "America/Santiago" })).getDay();
+
+      const horarioHoy = CONFIG_ALMACEN.horarios[diaSemana];
+      const [hActual, mActual] = horaStr.split(":").map(Number);
+      const minutosActuales = hActual * 60 + mActual;
+
+      const [hAp, mAp] = horarioHoy.apertura.split(":").map(Number);
+      const [hCi, mCi] = horarioHoy.cierre.split(":").map(Number);
+      const minApertura = hAp * 60 + mAp;
+      const minCierre = hCi * 60 + mCi;
+
+      if (minutosActuales >= minApertura && minutosActuales < minCierre) {
+        dot.className = "w-2.5 h-2.5 rounded-full bg-green-500 pulse-dot";
+        texto.textContent = `Abierto ahora (hasta las ${horarioHoy.cierre} hrs)`;
+        texto.className = "text-xs sm:text-sm font-bold text-green-800";
+      } else {
+        dot.className = "w-2.5 h-2.5 rounded-full bg-red-500";
+        texto.textContent = `Cerrado ahora (abre a las ${horarioHoy.apertura} hrs)`;
+        texto.className = "text-xs sm:text-sm font-bold text-stone-700";
+      }
+    }
+
+    let categoriaActiva = "todos";
+    let textoBusqueda = "";
+
+    function renderizarProductos() {
+      const contenedor = document.getElementById("grid-productos");
+      const sinResultados = document.getElementById("sin-resultados");
+      if (!contenedor || !sinResultados) return;
+
+      const filtrados = PRODUCTOS_VITRINA.filter(prod => {
+        const coincideCat = categoriaActiva === "todos" || prod.categoria === categoriaActiva;
+        const q = textoBusqueda.toLowerCase().trim();
+        const coincideTexto = !q ||
+          prod.nombre.toLowerCase().includes(q) ||
+          prod.descripcion.toLowerCase().includes(q) ||
+          prod.categoriaLabel.toLowerCase().includes(q);
+        return coincideCat && coincideTexto;
+      });
+
+      if (filtrados.length === 0) {
+        contenedor.innerHTML = "";
+        sinResultados.classList.remove("hidden");
+        return;
+      }
+
+      sinResultados.classList.add("hidden");
+
+      contenedor.innerHTML = filtrados.map(prod => {
+        const msgWsp = `Hola ${CONFIG_ALMACEN.nombre}, vi su página web y quería consultar disponibilidad de: *${prod.nombre}*.`;
+        const urlWsp = crearLinkWhatsApp(CONFIG_ALMACEN.whatsappNumero, msgWsp);
+        const encuadreStyle = prod.encuadreStyle ? prod.encuadreStyle : "object-position: center center;";
+        const onerrorAttr = prod.esPanAlmacen
+          ? `usarRespaldoPan(this, 'tarjeta')`
+          : `this.onerror=null;this.src='https://placehold.co/600x400/FEF3C7/78350F?text=${encodeURIComponent(prod.nombre)}';`;
+
+        return `
+          <article class="bg-stone-50 rounded-3xl border border-stone-200/90 overflow-hidden flex flex-col justify-between hover:shadow-md hover:border-amber-300 transition-all group">
+            <div>
+              <div class="aspect-[16/10] bg-stone-200 relative overflow-hidden">
+                <img
+                  src="${prod.imagen}"
+                  onerror="${onerrorAttr}"
+                  alt="${prod.nombre}"
+                  style="${encuadreStyle}"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-sm text-stone-800 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                  ${prod.icono} ${prod.categoriaLabel}
+                </span>
+                ${prod.destacado ? `<span class="absolute top-3 right-3 bg-amber-500 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full shadow-sm">Pan del Día</span>` : ""}
+              </div>
+
+              <div class="p-4 sm:p-5">
+                <h3 class="font-display font-bold text-base sm:text-lg text-stone-900 leading-snug">
+                  ${prod.nombre}
+                </h3>
+                <p class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed">
+                  ${prod.descripcion}
+                </p>
+              </div>
+            </div>
+
+            <div class="px-4 pb-4 sm:px-5 sm:pb-5 pt-2">
+              <div class="flex items-center justify-between text-xs text-stone-500 mb-3">
+                <span>Referencia:</span>
+                <span class="font-semibold text-stone-700">${prod.precio}</span>
+              </div>
+
+              ${prod.categoria === "panaderia" ? `
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="#encargo-pan"
+                     class="inline-flex items-center justify-center gap-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-2.5 px-3 rounded-xl transition-colors">
+                    <i class="fa-solid fa-clipboard-check"></i> Reservar
+                  </a>
+                  <a href="${urlWsp}" target="_blank" rel="noopener noreferrer"
+                     class="inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 text-white font-bold text-xs py-2.5 px-3 rounded-xl transition-colors">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Consultar
+                  </a>
+                </div>
+              ` : `
+                <a href="${urlWsp}" target="_blank" rel="noopener noreferrer"
+                   class="w-full inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 active:scale-[0.99] text-white font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl shadow-sm transition-all">
+                  <i class="fa-brands fa-whatsapp text-base"></i>
+                  <span>Consultar por WhatsApp</span>
+                </a>
+              `}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const anioEl = document.getElementById("anio-actual");
+      if (anioEl) anioEl.textContent = new Date().getFullYear();
+
+      const msgGeneral = `Hola ${CONFIG_ALMACEN.nombre}, vi su página web y quería hacer una consulta.`;
+      const linkWspGeneral = crearLinkWhatsApp(CONFIG_ALMACEN.whatsappNumero, msgGeneral);
+
+      ["btn-wsp-header", "btn-wsp-hero", "btn-wsp-footer", "btn-wsp-flotante", "btn-wsp-no-encontrado"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.href = linkWspGeneral;
+      });
+
+      const msgPan = `Hola ${CONFIG_ALMACEN.nombre}, quiero encargar marraquetas / hallullas para hoy.`;
+      const btnWspPan = document.getElementById("btn-wsp-pan-rapido");
+      if (btnWspPan) btnWspPan.href = crearLinkWhatsApp(CONFIG_ALMACEN.whatsappNumero, msgPan);
+
+      const msgCotizar = `Hola, vi la página web de ${CONFIG_ALMACEN.nombre} y me gustaría cotizar una página web + sistema de encargo de pan para mi negocio.`;
+      const btnCotizar = document.getElementById("btn-cotizar-servicio");
+      if (btnCotizar) btnCotizar.href = crearLinkWhatsApp(CONFIG_ALMACEN.whatsappNumero, msgCotizar);
+
+      actualizarEstadoAbierto();
+      setInterval(actualizarEstadoAbierto, 60000);
+
+      renderizarProductos();
+
+      document.querySelectorAll(".btn-cat").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".btn-cat").forEach(b => {
+            b.className = "btn-cat bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap transition-all";
+          });
+          btn.className = "btn-cat active-cat bg-stone-900 text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap transition-all";
+          categoriaActiva = btn.dataset.cat;
+          renderizarProductos();
+        });
+      });
+
+      const buscador = document.getElementById("buscador-productos");
+      if (buscador) {
+        buscador.addEventListener("input", (e) => {
+          textoBusqueda = e.target.value;
+          renderizarProductos();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
